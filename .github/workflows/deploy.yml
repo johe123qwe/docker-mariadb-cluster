@@ -17,7 +17,7 @@ jobs:
       - name: 输出变量
         run: |
           echo "开始部署"
-          echo ${{ secrets.DEPLOY_KEY }}
+          echo ${{ env.SSH-PORT1 }}
           echo ${{ secrets.SSH_HOST }}
           echo ${{ secrets.SSH_USERNAME }}
       - name: SSH 命令删除旧文件
