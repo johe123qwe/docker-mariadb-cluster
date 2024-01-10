@@ -14,6 +14,18 @@ jobs:
 
     steps: # 自动化步骤
       - uses: actions/checkout@v3 # 第一步，下载代码仓库
+      - name: SSH 命令删除旧文件
+        uses: appleboy/ssh-action@master
+        with:
+          # 这里配置对应仓库设置的变量，就可以避免服务器配置暴露
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.DEPLOY_KEY }}
+
+          # 先用 SSH 命令删除旧文件
+          script: |
+            rm -rf /usr/share/nginx/docker_mariadb_cluster/*
       - name:
         run: |
           echo "开始部署"
