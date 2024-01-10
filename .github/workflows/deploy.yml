@@ -13,8 +13,13 @@ jobs:
     runs-on: ubuntu-latest # 使用ubuntu系统镜像运行自动化脚本
 
     steps: # 自动化步骤
-      - uses: actions/checkout@v2 # 第一步，下载代码仓库
-
+      - uses: actions/checkout@v3 # 第一步，下载代码仓库
+      - name:
+        run: |
+          echo "开始部署"
+          echo ${{ secrets.DEPLOY_KEY }}
+          echo ${{ secrets.SSH_HOST }}
+          echo ${{ secrets.SSH_USERNAME }}
       - name: Deploy to Server # 第二步，rsync推文件
         uses: AEnterprise/rsync-deploy@v1.0.2 # 使用别人包装好的步骤镜像
         env:
